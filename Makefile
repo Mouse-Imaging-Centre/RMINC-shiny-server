@@ -1,9 +1,11 @@
-DOCKER_REPO ?= cfhammill/RMINC-shiny-server
+DOCKER_REPO ?= cfhammill/rminc-shiny-server
 TAG ?= latest
+TAG_ARGS := -t ${DOCKER_REPO}:$(shell echo ${TAG} | sed "s|:| -t ${DOCKER_REPO}:|g") 
+RMINC ?= "master"
 
 
 build:
-	docker build -t ${DOCKER_REPO}:${TAG} .
+	docker build --build-arg RMINC_ref=${RMINC} ${TAG_ARGS} .
 
 
 run:

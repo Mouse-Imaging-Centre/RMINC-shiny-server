@@ -3,6 +3,8 @@ FROM r-base:latest
 
 MAINTAINER Chris Hammill "cfhammill@gmail.com"
 
+ARG RMINC_ref
+
 RUN apt-get update && apt-get install -y \
     libssl1.0.2 \
     gdebi-core \
@@ -31,10 +33,12 @@ RUN dpkg -i ../minc-toolkit-1.9.11-20160202-Debian_8.0-x86_64.deb
 RUN . /opt/minc-itk4/minc-toolkit-config.sh
 
 ## Get the R stuffs
-RUN Rscript -e 'install.packages(c("devtools", "shinyBS", "reshape2", "DT"))'
-RUN Rscript -e 'devtools::install_github("Mouse-Imaging-Centre/RMINC" \
-                  , c("Depends", "Imports", "LinkingTo" \
-                    , "Suggests", "Enhances"))'
+RUN Rscript -e 'install.packages(c("devtools", "shinyBS", "reshape2", "DT", "plotrix", "ggplot2"))'
+RUN ref=$RMINC_ref && \
+  Rscript -e "devtools::install_github('Mouse-Imaging-Centre/RMINC' \
+                  , ref = \"${ref}\" \
+                  , c('Depends', 'Imports', 'LinkingTo' \
+                    , 'Suggests', 'Enhances'))"
 
 EXPOSE 3838
 
