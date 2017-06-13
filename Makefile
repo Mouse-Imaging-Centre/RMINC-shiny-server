@@ -1,5 +1,5 @@
-DOCKER_REPO=sergii/docker-shiny-server
-TAG=latest
+DOCKER_REPO ?= cfhammill/RMINC-shiny-server
+TAG ?= latest
 
 
 build:
@@ -7,7 +7,7 @@ build:
 
 
 run:
-	docker run -i -t -p 3838:3838 \
+	docker run -i -t -p 4001:3838 \
 		${DOCKER_REPO}
 
 push:
