@@ -25,7 +25,8 @@ RUN R -e "install.packages(c('shiny', 'rmarkdown'), repos='https://cran.rstudio.
 RUN apt-get update && apt-get install -y \
     libssl-dev \
     libcurl4-openssl-dev \
-    imagemagick
+    imagemagick \
+    lsof
 
 ## Get the toolkit
 RUN wget http://packages.bic.mni.mcgill.ca/minc-toolkit/Debian/minc-toolkit-1.9.11-20160202-Debian_8.0-x86_64.deb
