@@ -34,7 +34,8 @@ RUN dpkg -i ../minc-toolkit-1.9.11-20160202-Debian_8.0-x86_64.deb
 RUN . /opt/minc-itk4/minc-toolkit-config.sh
 
 ## Get the R stuffs
-RUN Rscript -e 'install.packages(c("devtools", "shinyBS", "reshape2", "DT", "plotrix", "ggplot2"))'
+RUN Rscript -e 'install.packages(c("devtools", "shinyBS", "reshape2", "plotrix", "ggplot2", "gridBase"))'
+RUN Rscript -e "devtools::install_github('rstudio/DT', ref = 'v0.1')"
 RUN ref=$RMINC_ref && \
   Rscript -e "devtools::install_github('Mouse-Imaging-Centre/RMINC' \
                   , ref = \"${ref}\" \
